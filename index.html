@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<!-- Ringdart — Multilingual Voice AI Agents. Premium-minimal light theme. Rename "Ringdart" to rebrand. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ringdart — Voice AI agents in any language, for any business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f4ee;
+    --paper-2:#efebe1;
+    --card:#fdfcf9;
+    --ink:#17150f;
+    --ink-soft:rgba(23,21,15,.64);
+    --ink-faint:rgba(23,21,15,.42);
+    --line:rgba(23,21,15,.13);
+    --line-soft:rgba(23,21,15,.07);
+    --accent:#0f6f5c;
+    --accent-deep:#0a4f41;
+    --accent-tint:rgba(15,111,92,.09);
+    --clay:#b8704a;
+    --display:"Fraunces", serif;
+    --body:"Hanken Grotesk", sans-serif;
+    --mono:"JetBrains Mono", monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  ::selection{background:var(--accent);color:#fff}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 30px}
+  .mono{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
+
+  /* faint paper texture only — restraint */
+  body::after{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.025;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  main, nav, footer{position:relative;z-index:1}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(246,244,238,.78);border-bottom:1px solid var(--line-soft)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .logo{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:600;font-size:1.42rem;letter-spacing:-.02em}
+  .logo .logomark{width:32px;height:32px;flex-shrink:0;display:block}
+  .logo .eq{display:flex;align-items:flex-end;gap:3px;height:20px}
+  .logo .eq span{width:3px;background:var(--accent);border-radius:2px;animation:eq 1.1s ease-in-out infinite}
+  .logo .eq span:nth-child(1){height:8px;animation-delay:0s}
+  .logo .eq span:nth-child(2){height:18px;animation-delay:.15s}
+  .logo .eq span:nth-child(3){height:11px;animation-delay:.3s}
+  .logo .eq span:nth-child(4){height:16px;animation-delay:.45s}
+  @keyframes eq{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+  .nav-links{display:flex;gap:36px;align-items:center}
+  .nav-links a:not(.btn){font-size:.94rem;color:var(--ink-soft);transition:color .2s}
+  .nav-links a:not(.btn):hover{color:var(--ink)}
+  .btn{font-family:var(--body);font-weight:600;font-size:.94rem;padding:11px 24px;border-radius:100px;border:none;cursor:pointer;transition:transform .18s ease, background .2s ease, color .2s ease}
+  .btn-primary{background:var(--ink);color:var(--paper)}
+  .btn-primary:hover{transform:translateY(-2px);background:var(--accent)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+  @media(max-width:780px){.nav-links a:not(.btn){display:none}}
+
+  /* HERO */
+  .hero{padding:96px 0 78px}
+  .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:60px;align-items:center}
+  @media(max-width:920px){.hero-grid{grid-template-columns:1fr;gap:44px}}
+  .tagpill{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:100px;padding:7px 16px;color:var(--ink-soft);margin-bottom:30px;font-size:.86rem}
+  .tagpill .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 9px rgba(15,111,92,.6)}
+  h1{font-family:var(--display);font-weight:500;letter-spacing:-.025em;line-height:1.0;font-size:clamp(2.8rem,6vw,4.8rem);margin-bottom:26px}
+  h1 .rot{color:var(--accent);font-style:italic;font-weight:600;position:relative;display:inline-block;min-width:5ch;transition:opacity .18s ease}
+  .hero p.lede{font-size:1.16rem;color:var(--ink-soft);max-width:31em;margin-bottom:36px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-stats{display:flex;gap:46px;margin-top:52px;flex-wrap:wrap}
+  .hero-stats .s{display:flex;flex-direction:column}
+  .hero-stats .num{font-family:var(--display);font-weight:600;font-size:2.05rem;color:var(--ink)}
+  .hero-stats .lab{font-size:.82rem;color:var(--ink-faint)}
+
+  /* call card */
+  .callcard{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 24px 60px rgba(23,21,15,.10);position:relative;overflow:hidden}
+  .callcard .ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .callcard .agent{display:flex;align-items:center;gap:11px;font-weight:600}
+  .callcard .avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font-family:var(--display);font-weight:600;color:#fff}
+  .live{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;color:var(--accent)}
+  .live .pulse{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 1.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(15,111,92,.5)}70%{box-shadow:0 0 0 9px rgba(15,111,92,0)}100%{box-shadow:0 0 0 0 rgba(15,111,92,0)}}
+  .wave{display:flex;align-items:center;gap:3px;height:42px;margin:4px 0 18px;justify-content:center}
+  .wave span{width:3px;background:var(--accent);opacity:.55;border-radius:3px;animation:w 1.2s ease-in-out infinite}
+  @keyframes w{0%,100%{height:5px;opacity:.35}50%{height:34px;opacity:.9}}
+  .transcript{min-height:158px;display:flex;flex-direction:column;gap:11px}
+  .bubble{padding:11px 14px;border-radius:14px;font-size:.92rem;max-width:86%;line-height:1.45;animation:rise .4s ease}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .bubble.ai{background:var(--accent-tint);border:1px solid rgba(15,111,92,.2);align-self:flex-start}
+  .bubble.cust{background:var(--paper-2);border:1px solid var(--line-soft);align-self:flex-end}
+  .bubble .who{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;opacity:.55;display:block;margin-bottom:3px}
+  .langflag{font-family:var(--mono);font-size:.6rem;color:var(--accent);float:right;opacity:.9}
+
+  /* MARQUEE */
+  .marquee{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:22px 0;overflow:hidden;white-space:nowrap}
+  .marquee .track{display:inline-block;animation:scroll 34s linear infinite}
+  .marquee .track span{font-family:var(--display);font-style:italic;font-weight:400;font-size:1.5rem;color:var(--ink-faint);margin:0 26px}
+  .marquee .track span b{color:var(--accent);font-weight:500;font-style:normal}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* SECTION SHELL */
+  section{padding:104px 0}
+  .eyebrow{color:var(--accent);font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:18px;display:block}
+  h2{font-family:var(--display);font-weight:500;letter-spacing:-.02em;line-height:1.05;font-size:clamp(2.1rem,4.2vw,3.2rem);margin-bottom:18px}
+  .sec-lede{color:var(--ink-soft);font-size:1.1rem;max-width:40em}
+  .sec-head{margin-bottom:58px;max-width:48em}
+
+  /* workflows */
+  .flow-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+  @media(max-width:780px){.flow-grid{grid-template-columns:1fr}}
+  .flow{background:var(--paper);padding:38px 34px;transition:background .25s ease;position:relative}
+  .flow:hover{background:var(--card)}
+  .flow .icon{width:44px;height:44px;border-radius:12px;background:var(--accent-tint);display:grid;place-items:center;margin-bottom:20px;font-size:1.2rem}
+  .flow h3{font-family:var(--display);font-weight:500;font-size:1.42rem;margin-bottom:10px;letter-spacing:-.01em}
+  .flow p{color:var(--ink-soft);font-size:.98rem}
+  .flow .tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:7px}
+  .flow .tags em{font-style:normal;font-family:var(--mono);font-size:.62rem;letter-spacing:.05em;color:var(--accent);border:1px solid rgba(15,111,92,.25);border-radius:100px;padding:4px 11px}
+
+  /* dark contrast band — languages */
+  .lang-sec{background:var(--ink);color:var(--paper)}
+  .lang-sec .eyebrow{color:#6fd9c2}
+  .lang-sec h2{color:var(--paper)}
+  .lang-sec .sec-lede{color:rgba(246,244,238,.66)}
+  .lang-cloud{display:flex;flex-wrap:wrap;gap:11px;margin-top:18px}
+  .lang-cloud .lc{font-family:var(--display);font-weight:400;font-size:1.04rem;padding:9px 18px;border-radius:100px;border:1px solid rgba(246,244,238,.18);color:var(--paper);transition:all .2s ease;cursor:default}
+  .lang-cloud .lc:hover{background:var(--paper);color:var(--ink);transform:translateY(-3px)}
+  .lang-feat{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:60px}
+  @media(max-width:780px){.lang-feat{grid-template-columns:1fr;gap:26px}}
+  .lang-feat .lf h4{font-family:var(--display);font-weight:500;font-size:1.22rem;margin-bottom:9px;display:flex;align-items:center;gap:10px}
+  .lang-feat .lf h4 .b{width:9px;height:9px;border-radius:2px;background:#6fd9c2}
+  .lang-feat .lf p{color:rgba(246,244,238,.6);font-size:.97rem}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  @media(max-width:780px){.steps{grid-template-columns:1fr}}
+  .step{border-top:1.5px solid var(--accent);padding-top:24px}
+  .step .n{font-family:var(--mono);color:var(--accent);font-size:.74rem;letter-spacing:.12em;margin-bottom:16px;display:block}
+  .step h3{font-family:var(--display);font-weight:500;font-size:1.5rem;margin-bottom:11px}
+  .step p{color:var(--ink-soft);font-size:.98rem}
+
+  /* industries */
+  .ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media(max-width:920px){.ind-grid{grid-template-columns:repeat(2,1fr)}}
+  .ind{border:1px solid var(--line);border-radius:14px;padding:22px 20px;display:flex;align-items:center;gap:13px;transition:all .22s ease;background:var(--card)}
+  .ind:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 26px rgba(23,21,15,.07)}
+  .ind .em{font-size:1.45rem}
+  .ind b{font-weight:600;font-size:1rem;display:block}
+  .ind small{color:var(--ink-faint);font-size:.77rem}
+
+  /* feature strip */
+  .feat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  @media(max-width:780px){.feat-strip{grid-template-columns:repeat(2,1fr)}}
+  .feat-strip .fc{background:var(--paper);padding:30px 26px}
+  .feat-strip .fc .k{font-family:var(--display);font-weight:500;font-size:1.42rem;color:var(--accent);margin-bottom:8px;letter-spacing:-.01em}
+  .feat-strip .fc .v{font-size:.9rem;color:var(--ink-soft)}
+
+  /* pricing */
+  .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
+  @media(max-width:980px){.price-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.price-grid{grid-template-columns:1fr}}
+  .tier{border:1px solid var(--line);border-radius:18px;padding:30px 28px;display:flex;flex-direction:column;background:var(--card);transition:transform .25s ease,box-shadow .25s ease}
+  .tier:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(23,21,15,.08)}
+  .tier.feat{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .tier.feat .tdesc{color:rgba(246,244,238,.55)}
+  .tier.feat .cost .per,.tier.feat li{color:rgba(246,244,238,.78)}
+  .tier.feat .mins{color:#6fd9c2}
+  .tier .pop{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;color:#6fd9c2;margin-bottom:12px}
+  .tier .tname{font-family:var(--display);font-weight:500;font-size:1.5rem;margin-bottom:7px}
+  .tier .tdesc{color:var(--ink-faint);font-size:.82rem;min-height:36px}
+  .tier .cost{margin:20px 0 4px;display:flex;align-items:baseline;gap:4px}
+  .tier .cost .amt{font-family:var(--display);font-weight:600;font-size:2.4rem}
+  .tier .cost .per{color:var(--ink-faint);font-size:.84rem}
+  .tier .mins{font-family:var(--mono);font-size:.7rem;color:var(--accent);margin-bottom:20px}
+  .tier ul{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:26px;flex:1}
+  .tier li{font-size:.91rem;color:var(--ink-soft);display:flex;gap:9px;align-items:flex-start}
+  .tier li::before{content:"";width:15px;height:15px;flex-shrink:0;margin-top:4px;background:var(--accent);border-radius:50%;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/11px no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/11px no-repeat}
+  .tier.feat li::before{background:#6fd9c2}
+  .tier .btn{width:100%;text-align:center}
+  .tier.feat .btn-ghost{border-color:rgba(246,244,238,.3);color:var(--paper)}
+  .tier.feat .btn-ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  .price-note{text-align:center;color:var(--ink-faint);font-size:.86rem;margin-top:30px}
+
+  /* faq */
+  .faq{max-width:800px;margin:0 auto}
+  .qa{border-bottom:1px solid var(--line)}
+  .qa summary{list-style:none;cursor:pointer;padding:24px 0;font-family:var(--display);font-weight:500;font-size:1.2rem;display:flex;justify-content:space-between;gap:20px;align-items:center}
+  .qa summary::-webkit-details-marker{display:none}
+  .qa summary .plus{flex-shrink:0;width:20px;height:20px;position:relative}
+  .qa summary .plus::before,.qa summary .plus::after{content:"";position:absolute;background:var(--accent);border-radius:2px}
+  .qa summary .plus::before{top:9px;left:0;width:20px;height:2px}
+  .qa summary .plus::after{left:9px;top:0;height:20px;width:2px;transition:transform .25s,opacity .25s}
+  .qa[open] summary .plus::after{transform:rotate(90deg);opacity:0}
+  .qa p{color:var(--ink-soft);padding:0 0 24px;font-size:.97rem;max-width:62ch}
+
+  /* CTA */
+  .cta{background:var(--ink);border-radius:26px;padding:60px;color:var(--paper);position:relative;overflow:hidden}
+  .cta::before{content:"";position:absolute;top:-40%;right:-10%;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(15,111,92,.35),transparent 65%)}
+  .cta-inner{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+  @media(max-width:820px){.cta-inner{grid-template-columns:1fr}}
+  .cta h2{color:var(--paper)}
+  .cta p{color:rgba(246,244,238,.72);font-size:1.08rem;max-width:25em}
+  .form{display:flex;flex-direction:column;gap:12px;background:rgba(246,244,238,.05);padding:28px;border-radius:18px;border:1px solid rgba(246,244,238,.12)}
+  .form input,.form select{font-family:var(--body);font-size:.97rem;padding:13px 15px;border-radius:11px;border:1px solid rgba(246,244,238,.18);background:rgba(246,244,238,.96);color:var(--ink);outline:none}
+  .form input:focus,.form select:focus{border-color:#6fd9c2;box-shadow:0 0 0 3px rgba(111,217,194,.25)}
+  .form button{background:var(--accent);color:#fff;font-weight:600;padding:14px;border:none;border-radius:11px;cursor:pointer;font-size:1rem;transition:transform .18s,background .2s}
+  .form button:hover{transform:translateY(-2px);background:#13836c}
+  .form .ok{display:none;color:#6fd9c2;font-weight:600;text-align:center;padding:10px}
+
+  /* footer */
+  footer{border-top:1px solid var(--line-soft);padding:60px 0 42px;margin-top:40px}
+  .foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+  .foot-grid .col h5{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:15px}
+  .foot-grid .col a{display:block;color:var(--ink-soft);font-size:.91rem;margin-bottom:9px;transition:color .2s}
+  .foot-grid .col a:hover{color:var(--ink)}
+  .foot-bottom{margin-top:46px;padding-top:26px;border-top:1px solid var(--line-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;color:var(--ink-faint);font-size:.83rem}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  .logo .mark{width:30px;height:30px;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="logo">
+      <svg class="logomark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="var(--accent)" stroke-width="2.4" opacity=".18"/><circle cx="20" cy="20" r="11.5" fill="none" stroke="var(--accent)" stroke-width="2.4" opacity=".4"/><circle cx="20" cy="20" r="6.5" fill="none" stroke="var(--accent)" stroke-width="2.4"/><path d="M21 18.5 L30 9.5 L26 17.5 L34 19.5 Z" fill="var(--clay)"/><circle cx="20" cy="20" r="2" fill="var(--accent-deep)"/></svg>
+      Ringdart
+    </div>
+    <div class="nav-links">
+      <a href="#what">What it does</a>
+      <a href="#languages">Languages</a>
+      <a href="#industries">Industries</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact" class="btn btn-primary">Book a demo</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="tagpill"><span class="dot"></span> Voice AI · live in 7 days · any industry</span>
+        <h1>Voice agents that answer in <span class="rot" id="rot">Spanish</span></h1>
+        <p class="lede">Ringdart builds done-for-you voice AI agents that call, qualify, follow up and book — in your customer's own language. Solar, dental, real estate, restaurants, logistics. If it runs on phone calls, we automate it.</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">Get my agent built</a>
+          <a href="#how" class="btn btn-ghost">See how it works</a>
+        </div>
+        <div class="hero-stats">
+          <div class="s"><span class="num">30+</span><span class="lab">languages &amp; dialects</span></div>
+          <div class="s"><span class="num">&lt;600ms</span><span class="lab">voice latency</span></div>
+          <div class="s"><span class="num">24/7</span><span class="lab">never misses a call</span></div>
+          <div class="s"><span class="num">70%</span><span class="lab">cheaper than staffing</span></div>
+        </div>
+      </div>
+
+      <div class="callcard">
+        <div class="ch">
+          <div class="agent"><span class="avatar">R</span> Ringdart Agent</div>
+          <div class="live"><span class="pulse"></span> LIVE CALL</div>
+        </div>
+        <div class="wave" id="wave"></div>
+        <div class="transcript" id="transcript"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="track">
+      <span>Inbound qualification</span><span>·</span><span><b>Bilingual follow-up</b></span><span>·</span>
+      <span>Appointment reminders</span><span>·</span><span>Review &amp; referral capture</span><span>·</span>
+      <span><b>Win-back campaigns</b></span><span>·</span><span>After-hours answering</span><span>·</span>
+      <span>NPS surveys</span><span>·</span><span><b>Payment reminders</b></span><span>·</span>
+      <span>Inbound qualification</span><span>·</span><span><b>Bilingual follow-up</b></span><span>·</span>
+      <span>Appointment reminders</span><span>·</span><span>Review &amp; referral capture</span><span>·</span>
+      <span><b>Win-back campaigns</b></span><span>·</span><span>After-hours answering</span><span>·</span>
+      <span>NPS surveys</span><span>·</span><span><b>Payment reminders</b></span><span>·</span>
+    </div>
+  </div>
+
+  <!-- WHAT IT DOES -->
+  <section id="what">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">What your agent handles</span>
+        <h2>Four jobs your team keeps dropping</h2>
+        <p class="sec-lede">Every voice agent ships with these workflows out of the box, then we tune the scripts to your exact business — your offers, your objections, your tone.</p>
+      </div>
+      <div class="flow-grid">
+        <div class="flow reveal">
+          <div class="icon">📞</div>
+          <h3>Inbound lead qualification</h3>
+          <p>Answers every call in under a minute, asks your qualifying questions, scores the lead, and routes hot prospects straight to a human — or books them in.</p>
+          <div class="tags"><em>responds in &lt;60s</em><em>filters tire-kickers</em><em>books on calendar</em></div>
+        </div>
+        <div class="flow reveal">
+          <div class="icon">⭐</div>
+          <h3>Feedback, reviews &amp; referrals</h3>
+          <p>Automated check-ins after a sale or service. Captures NPS, requests reviews when sentiment is high, flags unhappy customers to a person instantly.</p>
+          <div class="tags"><em>NPS scoring</em><em>review requests</em><em>escalates complaints</em></div>
+        </div>
+        <div class="flow reveal">
+          <div class="icon">🔁</div>
+          <h3>Engagement &amp; upsell</h3>
+          <p>Quarterly touch-points that introduce add-ons, renewals, and referral offers — personalized to each customer's history and segment.</p>
+          <div class="tags"><em>upsell scripts</em><em>renewals</em><em>win-back</em></div>
+        </div>
+        <div class="flow reveal">
+          <div class="icon">🗓️</div>
+          <h3>Appointment reminders</h3>
+          <p>Call + SMS reminders before appointments, with voice-driven rescheduling. Cuts no-shows by roughly a third and frees up your front desk.</p>
+          <div class="tags"><em>cuts no-shows ~30%</em><em>reschedule by voice</em><em>SMS backup</em></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGUAGES (dark band) -->
+  <section id="languages" class="lang-sec">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">The real differentiator</span>
+        <h2>Built language-first, not language-as-an-afterthought</h2>
+        <p class="sec-lede">Most of your missed revenue is people who'd rather not do business in their second language. Ringdart agents detect the caller's language and switch mid-call — naturally, with the right accent and idioms.</p>
+        <div class="lang-cloud">
+          <span class="lc">English</span><span class="lc">Español</span><span class="lc">हिन्दी</span>
+          <span class="lc">中文</span><span class="lc">العربية</span><span class="lc">Français</span>
+          <span class="lc">Português</span><span class="lc">Tiếng Việt</span><span class="lc">한국어</span>
+          <span class="lc">Tagalog</span><span class="lc">Deutsch</span><span class="lc">Italiano</span>
+          <span class="lc">日本語</span><span class="lc">ਪੰਜਾਬੀ</span><span class="lc">+ 16 more</span>
+        </div>
+      </div>
+      <div class="lang-feat">
+        <div class="lf reveal">
+          <h4><span class="b"></span> Mid-call switching</h4>
+          <p>Starts in English, hears Spanish, switches instantly — no menus, no "press 2." The caller never has to ask.</p>
+        </div>
+        <div class="lf reveal">
+          <h4><span class="b"></span> Real dialects</h4>
+          <p>Latin-American vs. Iberian Spanish, regional Hindi, Cantonese vs. Mandarin. The accent matches the market.</p>
+        </div>
+        <div class="lf reveal">
+          <h4><span class="b"></span> Localized scripts</h4>
+          <p>We don't translate word-for-word — we rewrite your scripts so they actually land in each language and culture.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">From zero to live</span>
+        <h2>You stay in your business. We build the agent.</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="n">STEP 01</span>
+          <h3>Tell us the workflow</h3>
+          <p>A 30-minute call. We learn your offers, your common questions, the languages your customers speak, and where calls fall through the cracks today.</p>
+        </div>
+        <div class="step reveal">
+          <span class="n">STEP 02</span>
+          <h3>We build &amp; train it</h3>
+          <p>We write the scripts in every language, connect your CRM and calendar, set up escalation rules, and test against real call scenarios.</p>
+        </div>
+        <div class="step reveal">
+          <span class="n">STEP 03</span>
+          <h3>It goes live — you watch</h3>
+          <p>Your agent starts calling and answering. Every call is transcribed, scored, and logged to your CRM. You see it all on one dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section id="industries">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Who it's for</span>
+        <h2>Any business that lives and dies by the phone</h2>
+        <p class="sec-lede">We started in solar. The same engine runs for any industry with leads to qualify, customers to follow up with, and appointments to keep.</p>
+      </div>
+      <div class="ind-grid">
+        <div class="ind reveal"><span class="em">☀️</span><span><b>Solar &amp; energy</b><small>Post-install + leads</small></span></div>
+        <div class="ind reveal"><span class="em">🦷</span><span><b>Dental &amp; medical</b><small>Reminders + recalls</small></span></div>
+        <div class="ind reveal"><span class="em">🏠</span><span><b>Real estate</b><small>Lead intake + showings</small></span></div>
+        <div class="ind reveal"><span class="em">🍽️</span><span><b>Restaurants</b><small>Reservations + orders</small></span></div>
+        <div class="ind reveal"><span class="em">🔧</span><span><b>Home services</b><small>Dispatch + quotes</small></span></div>
+        <div class="ind reveal"><span class="em">🚗</span><span><b>Auto &amp; dealers</b><small>Service + test drives</small></span></div>
+        <div class="ind reveal"><span class="em">🏋️</span><span><b>Fitness &amp; gyms</b><small>Trials + win-back</small></span></div>
+        <div class="ind reveal"><span class="em">📦</span><span><b>Logistics</b><small>Delivery confirms</small></span></div>
+        <div class="ind reveal"><span class="em">⚖️</span><span><b>Legal &amp; pro services</b><small>Intake + screening</small></span></div>
+        <div class="ind reveal"><span class="em">🛒</span><span><b>E-commerce</b><small>Order &amp; abandoned cart</small></span></div>
+        <div class="ind reveal"><span class="em">🏨</span><span><b>Hospitality</b><small>Bookings + concierge</small></span></div>
+        <div class="ind reveal"><span class="em">✚</span><span><b>Anything else</b><small>If it's a call, we do it</small></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE STRIP -->
+  <section style="padding-top:0">
+    <div class="wrap reveal">
+      <div class="feat-strip">
+        <div class="fc"><div class="k">HubSpot · Salesforce</div><div class="v">Native CRM sync. GoHighLevel &amp; Zapier too. Every call logged automatically.</div></div>
+        <div class="fc"><div class="k">Live transfer</div><div class="v">Angry caller or hot lead? The agent hands off to a human in real time.</div></div>
+        <div class="fc"><div class="k">TCPA + SOC 2</div><div class="v">Do-not-call scrubbing, consent handling, recording disclosures handled.</div></div>
+        <div class="fc"><div class="k">Full transcripts</div><div class="v">Recordings, sentiment scores and outcomes on a real-time dashboard.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Simple monthly pricing</span>
+        <h2>One agent. One bill. No call-center headcount.</h2>
+        <p class="sec-lede">Each plan includes a set pool of AI call minutes, CRM integration, and a dashboard. Overages billed at $0.35/min. Cancel anytime.</p>
+      </div>
+      <div class="price-grid">
+        <div class="tier reveal">
+          <div class="tname">Starter</div>
+          <div class="tdesc">One workflow, one language. Great for testing the waters.</div>
+          <div class="cost"><span class="amt">$499</span><span class="per">/mo</span></div>
+          <div class="mins">1,000 minutes / month</div>
+          <ul>
+            <li>One core workflow</li>
+            <li>One language</li>
+            <li>Basic CRM sync</li>
+            <li>Email reports</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost">Start here</a>
+        </div>
+        <div class="tier feat reveal">
+          <div class="pop">★ MOST POPULAR</div>
+          <div class="tname">Growth</div>
+          <div class="tdesc">All four workflows, bilingual, full dashboard.</div>
+          <div class="cost"><span class="amt">$999</span><span class="per">/mo</span></div>
+          <div class="mins">2,500 minutes / month</div>
+          <ul>
+            <li>All 4 workflows</li>
+            <li>Bilingual (any 2 languages)</li>
+            <li>HubSpot / Salesforce</li>
+            <li>Live dashboard &amp; transcripts</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost">Book a demo</a>
+        </div>
+        <div class="tier reveal">
+          <div class="tname">Scale</div>
+          <div class="tdesc">High volume, custom voice, priority support.</div>
+          <div class="cost"><span class="amt">$1,499</span><span class="per">/mo</span></div>
+          <div class="mins">5,000 minutes / month</div>
+          <ul>
+            <li>Everything in Growth</li>
+            <li>Custom branded voice</li>
+            <li>Up to 4 languages</li>
+            <li>Priority support + QA</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost">Talk to us</a>
+        </div>
+        <div class="tier reveal">
+          <div class="tname">Enterprise</div>
+          <div class="tdesc">Multi-location, white-label, dedicated team.</div>
+          <div class="cost"><span class="amt">Custom</span></div>
+          <div class="mins">Unlimited minutes</div>
+          <ul>
+            <li>White-label option</li>
+            <li>Unlimited languages</li>
+            <li>Custom integrations</li>
+            <li>Dedicated account manager</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost">Contact sales</a>
+        </div>
+      </div>
+      <p class="price-note">A full-time bilingual phone rep runs $3,500–$4,500/mo in most US metros. Ringdart delivers 24/7 coverage at a fraction of that.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+        <span class="eyebrow">Good questions</span>
+        <h2>Things people ask before they sign</h2>
+      </div>
+      <div class="faq">
+        <details class="qa reveal"><summary>Will callers know it's an AI?<span class="plus"></span></summary><p>The agent identifies itself as an AI assistant at the start of every call — it's good practice and legally required in several states. The voice is natural enough that the conversation feels easy, and a real person is one sentence away whenever the caller wants one.</p></details>
+        <details class="qa reveal"><summary>How fast can my agent go live?<span class="plus"></span></summary><p>Most agents are built, tested, and live within 7 business days. Simple single-workflow setups can be faster; heavily customized multilingual flows with deep CRM logic take a little longer.</p></details>
+        <details class="qa reveal"><summary>Which languages do you actually support?<span class="plus"></span></summary><p>30+ languages and regional dialects, including English, Spanish (LatAm &amp; Iberian), Hindi, Mandarin, Cantonese, Arabic, French, Portuguese, Vietnamese, Korean, Tagalog and more. If yours isn't listed, ask — coverage is expanding constantly.</p></details>
+        <details class="qa reveal"><summary>Does it connect to my CRM?<span class="plus"></span></summary><p>Yes. Native HubSpot and Salesforce, plus GoHighLevel and anything reachable through Zapier. Every call writes transcripts, sentiment, and outcomes back to your records automatically.</p></details>
+        <details class="qa reveal"><summary>Is it compliant?<span class="plus"></span></summary><p>We handle TCPA do-not-call scrubbing, consent language, and recording disclosures, and operate on SOC 2 infrastructure. We'll also recommend you run your specific use case past your own counsel before launch.</p></details>
+        <details class="qa reveal"><summary>Who owns and stores my data? Is it private?<span class="plus"></span></summary><p>You own it, completely. Every call, transcript, and contact lives in your own CRM and systems. Your data stays private — we never store, sell, or share your customer data, and we don't keep standing access to it. The agent simply reads from and writes to the systems you already control.</p></details>
+        <details class="qa reveal"><summary>Do I need technical staff to run it?<span class="plus"></span></summary><p>No. It's a done-for-you managed service. We build, integrate, and maintain the agent. You just watch the dashboard and answer the warm leads it hands you.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / CTA -->
+  <section id="contact">
+    <div class="wrap reveal">
+      <div class="cta">
+        <div class="cta-inner">
+          <div>
+            <h2>Hear your own agent in action</h2>
+            <p>Tell us your business and the language your customers speak. We'll build a live demo agent and call you with it — usually within a couple of days.</p>
+            <p style="display:flex;align-items:flex-start;gap:10px;margin-top:20px;font-size:.95rem;color:rgba(246,244,238,.82)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#6fd9c2" stroke-width="1.8" style="width:19px;height:19px;flex-shrink:0;margin-top:2px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Your data stays yours. Everything lives in your own CRM and systems — we never store, sell, or access your customer data.
+            </p>
+          </div>
+          <form class="form" id="form" name="demo-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="demo-request" />
+            <p style="display:none"><label>Don't fill this out: <input name="bot-field" /></label></p>
+            <input type="text" id="f-name" name="name" placeholder="Your name" />
+            <input type="text" id="f-biz" name="business" placeholder="Business name & industry" />
+            <input type="email" id="f-email" name="email" placeholder="Work email" />
+            <select id="f-lang" name="languages">
+              <option value="">Primary language(s) needed…</option>
+              <option>English only</option>
+              <option>English + Spanish</option>
+              <option>English + Hindi</option>
+              <option>English + Mandarin</option>
+              <option>English + another language</option>
+              <option>Three or more languages</option>
+            </select>
+            <button type="submit" id="submit">Build my demo agent →</button>
+            <div class="ok" id="ok">✓ Got it — we'll be in touch shortly to set up your demo.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="col" style="max-width:280px">
+        <div class="logo" style="margin-bottom:14px">
+          <svg class="logomark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="var(--accent)" stroke-width="2.4" opacity=".18"/><circle cx="20" cy="20" r="11.5" fill="none" stroke="var(--accent)" stroke-width="2.4" opacity=".4"/><circle cx="20" cy="20" r="6.5" fill="none" stroke="var(--accent)" stroke-width="2.4"/><path d="M21 18.5 L30 9.5 L26 17.5 L34 19.5 Z" fill="var(--clay)"/><circle cx="20" cy="20" r="2" fill="var(--accent-deep)"/></svg>
+          Ringdart
+        </div>
+        <p style="color:var(--ink-faint);font-size:.9rem">Multilingual voice AI agents, done for you — deployed anywhere.</p>
+      </div>
+      <div class="col">
+        <h5>Product</h5>
+        <a href="#what">Workflows</a><a href="#languages">Languages</a><a href="#industries">Industries</a><a href="#pricing">Pricing</a>
+      </div>
+      <div class="col">
+        <h5>Company</h5>
+        <a href="#how">How it works</a><a href="#faq">FAQ</a><a href="#contact">Book a demo</a>
+      </div>
+      <div class="col">
+        <h5>Get started</h5>
+        <a href="#contact">Request a demo agent</a><a href="#contact">Talk to sales</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Ringdart. All rights reserved.</span>
+      <span class="mono">Voice AI · 30+ languages · any industry</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const langs = ["Spanish","Hindi","Mandarin","French","Vietnamese","Arabic","English","Korean","Portuguese","Tagalog"];
+  let li = 0;
+  const rot = document.getElementById('rot');
+  setInterval(()=>{ li=(li+1)%langs.length; rot.style.opacity=0; setTimeout(()=>{rot.textContent=langs[li];rot.style.opacity=1;},180); }, 2200);
+
+  const wave = document.getElementById('wave');
+  for(let i=0;i<40;i++){ const s=document.createElement('span'); s.style.animationDelay=(i*0.045)+'s'; s.style.animationDuration=(0.9+Math.random()*0.7)+'s'; wave.appendChild(s); }
+
+  const lines = [
+    {who:'Ringdart Agent',cls:'ai',flag:'EN',txt:"Hi! Thanks for calling Bright Solar — how can I help today?"},
+    {who:'Caller',cls:'cust',flag:'ES',txt:"Hola… ¿hablan español?"},
+    {who:'Ringdart Agent',cls:'ai',flag:'ES',txt:"¡Por supuesto! ¿Le gustaría una cotización para su techo?"},
+    {who:'Caller',cls:'cust',flag:'ES',txt:"Sí, mi recibo de luz es muy alto."},
+    {who:'Ringdart Agent',cls:'ai',flag:'ES',txt:"Perfecto. Le agendo una visita gratuita — ¿le sirve el jueves a las 4?"},
+    {who:'Caller',cls:'cust',flag:'ES',txt:"Sí, el jueves está bien."},
+    {who:'Ringdart Agent',cls:'ai',flag:'ES',txt:"¡Listo! Cita confirmada y enviada a su correo. ✓"},
+  ];
+  const t = document.getElementById('transcript');
+  let idx=0;
+  function pushLine(){
+    if(idx>=lines.length){ setTimeout(()=>{ t.innerHTML=''; idx=0; pushLine(); }, 2600); return; }
+    const l=lines[idx];
+    const b=document.createElement('div');
+    b.className='bubble '+l.cls;
+    b.innerHTML='<span class="who">'+l.who+'<span class="langflag">'+l.flag+'</span></span>'+l.txt;
+    t.appendChild(b);
+    if(t.children.length>4) t.removeChild(t.firstChild);
+    idx++;
+    setTimeout(pushLine, 1500);
+  }
+  pushLine();
+
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay=(i%4*0.06)+'s'; io.observe(el); });
+
+  document.getElementById('form').addEventListener('submit',(e)=>{
+    e.preventDefault();
+    const form=e.target;
+    const name=document.getElementById('f-name').value.trim();
+    const email=document.getElementById('f-email').value.trim();
+    if(!name||!email){ alert('Please add your name and email so we can reach you.'); return; }
+    fetch('/',{ method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams(new FormData(form)).toString() })
+      .then(()=>{
+        ['f-name','f-biz','f-email','f-lang'].forEach(id=>document.getElementById(id).style.display='none');
+        document.getElementById('submit').style.display='none';
+        document.getElementById('ok').style.display='block';
+      })
+      .catch(()=>alert('Something went wrong sending your request. Please try again.'));
+  });
+</script>
+</body>
+</html>
