@@ -216,6 +216,7 @@
   .form input:focus,.form select:focus{border-color:#6fd9c2;box-shadow:0 0 0 3px rgba(111,217,194,.25)}
   .form button{background:var(--accent);color:#fff;font-weight:600;padding:14px;border:none;border-radius:11px;cursor:pointer;font-size:1rem;transition:transform .18s,background .2s}
   .form button:hover{transform:translateY(-2px);background:#13836c}
+  .form button:disabled{opacity:.6;cursor:wait;transform:none}
   .form .ok{display:none;color:#6fd9c2;font-weight:600;text-align:center;padding:10px}
 
   /* footer */
@@ -526,9 +527,11 @@
               Your data stays yours. Everything lives in your own CRM and systems — we never store, sell, or access your customer data.
             </p>
           </div>
-          <form class="form" id="form" name="demo-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="demo-request" />
-            <p style="display:none"><label>Don't fill this out: <input name="bot-field" /></label></p>
+          <form class="form" id="form">
+            <input type="hidden" name="access_key" value="b0da5331-0735-43a1-af97-18b80324781e" />
+            <input type="hidden" name="subject" value="New Ringdart demo request" />
+            <input type="hidden" name="from_name" value="Ringdart Website" />
+            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
             <input type="text" id="f-name" name="name" placeholder="Your name" />
             <input type="text" id="f-biz" name="business" placeholder="Business name & industry" />
             <input type="email" id="f-email" name="email" placeholder="Work email" />
@@ -616,19 +619,32 @@
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
   document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay=(i%4*0.06)+'s'; io.observe(el); });
 
-  document.getElementById('form').addEventListener('submit',(e)=>{
+  document.getElementById('form').addEventListener('submit', async (e)=>{
     e.preventDefault();
     const form=e.target;
     const name=document.getElementById('f-name').value.trim();
     const email=document.getElementById('f-email').value.trim();
     if(!name||!email){ alert('Please add your name and email so we can reach you.'); return; }
-    fetch('/',{ method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams(new FormData(form)).toString() })
-      .then(()=>{
+    const btn=document.getElementById('submit');
+    btn.disabled=true; btn.textContent='Sending…';
+    try{
+      const res=await fetch('https://api.web3forms.com/submit',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify(Object.fromEntries(new FormData(form)))
+      });
+      const data=await res.json();
+      if(res.ok && data.success){
         ['f-name','f-biz','f-email','f-lang'].forEach(id=>document.getElementById(id).style.display='none');
-        document.getElementById('submit').style.display='none';
+        btn.style.display='none';
         document.getElementById('ok').style.display='block';
-      })
-      .catch(()=>alert('Something went wrong sending your request. Please try again.'));
+      }else{
+        throw new Error(data.message||'Submission failed');
+      }
+    }catch(err){
+      btn.disabled=false; btn.textContent='Build my demo agent →';
+      alert('Something went wrong sending your request. Please try again or email us directly.');
+    }
   });
 </script>
 </body>
